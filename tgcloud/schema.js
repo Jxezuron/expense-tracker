@@ -1,10 +1,18 @@
 import { table, integer, text } from 'sdk/db';
 
-// Your database tables go here as named exports. Deploying this file registers the
-// schema; applying the changes (a migration) updates the database.
+export const transaction = table('transaction', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  userId: integer('user_id').notNull(),
+  type: text('type').notNull(),
+  amount: integer('amount').notNull(),
+  currency: text('currency').notNull(),
+  category: text('category').notNull(),
+  note: text('note'),
+  createdAt: integer('created_at').notNull(),
+});
 
-// Uncomment to define your first table:
-// export const users = table('users', {
-//   id:   integer('id').primaryKey({ autoIncrement: true }),
-//   name: text('name').notNull(),
-// });
+// Stores each user's chosen language ('en' or 'km').
+export const userSetting = table('user_setting', {
+  userId: integer('user_id').primaryKey(),
+  language: text('language').notNull(),
+});
